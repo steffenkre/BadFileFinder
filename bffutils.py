@@ -37,5 +37,10 @@ def delete_path(parentwidget, listname, paths):
     except IndexError:
         print("no path selected")
 
+
+# todo
 def export_results(parentwidget, listname):
+    pass
+
+def search():
     pass
