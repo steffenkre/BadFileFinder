@@ -36,3 +36,6 @@ def delete_path(parentwidget, listname, paths):
         save_paths(paths)
     except IndexError:
         print("no path selected")
+
+def export_results(parentwidget, listname):
+    pass

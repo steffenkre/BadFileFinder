@@ -29,7 +29,7 @@ deletepath_button = ttk.Button(maincontainer, text="Delete Path", width=20, styl
 
 result_label = ttk.Label(maincontainer,text="Results",font=("Calibri", 12)).grid(row=5,column=0, pady=12, padx=2, sticky="w", columnspan=1)
 result_list = tkinter.Listbox(maincontainer, name="resultlistbox" ,listvariable=tkinter.StringVar(value=pathlist), width=104, height=24).grid(row=6,column=0, pady=2, padx=2, sticky="w", columnspan=2)
-export_button = ttk.Button(maincontainer, text="Export Results", width=20, command= lambda:bffutils.add_path(maincontainer, "pathlistbox", pathlist) ).grid(row=7,column=0, pady=2, padx=2, sticky="e", columnspan=2)
+export_button = ttk.Button(maincontainer, text="Export Results", width=20, command= lambda:bffutils.export_results(maincontainer, "resultlistbox") ).grid(row=7,column=0, pady=2, padx=2, sticky="e", columnspan=2)
 
 maincontainer.pack() #needs to be packed after its content
 root.mainloop()
