@@ -3,10 +3,11 @@ from tkinter import filedialog
 
 def add_path(parentwidget, listname ,paths):
     x = filedialog.askdirectory()
-    paths.append(x)
-    list = parentwidget.children[listname]
-    list.insert(0, x)
-    save_paths(paths)
+    if x != "":
+        paths.append(x)
+        list = parentwidget.children[listname]
+        list.insert(0, x)
+        save_paths(paths)
 
 def load_paths():
     pathlist = []
