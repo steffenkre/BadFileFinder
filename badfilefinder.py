@@ -4,8 +4,7 @@ from matplotlib.pyplot import fill
 from unicodedata import name
 from tkinter import ttk
 
-pathlist = []
-
+pathlist = bffutils.load_paths()
 root = tkinter.Tk()
 
 root.title("Bad File Finder 0.01a")
@@ -26,9 +25,11 @@ maincontainer.rowconfigure(6, weight=1)
 maincontainer.columnconfigure(0, weight=1)
 
 # searchbar
-search_Label = ttk.Label(maincontainer,text="Search",font=("Calibri", 12)).grid(row=0,column=0, pady=0, padx=2, sticky=tkinter.W, columnspan=1)
-search_entry = ttk.Entry(maincontainer).grid(row=1,column=0, pady=2, padx=2, sticky=tkinter.W + tkinter.E, columnspan=3)
-search_button = ttk.Button(maincontainer,text="Search", width=20).grid(row=1,column=3, pady=2, padx=2, sticky=tkinter.W + tkinter.E, columnspan=1)
+search_Label = ttk.Label(maincontainer,text="Search by Regular Expression",font=("Calibri", 12)).grid(row=0,column=0, pady=0, padx=2, sticky=tkinter.W, columnspan=1)
+search_entry = ttk.Entry(maincontainer)
+search_entry.grid(row=1,column=0, pady=2, padx=2, sticky=tkinter.W + tkinter.E, columnspan=3)
+addpath_button = ttk.Button(maincontainer, text="Add Path", width=20, command= lambda:bffutils.add_path(maincontainer, "pathlistbox", pathlist) ).grid(row=4,column=2, pady=2, padx=2, sticky="e", columnspan=1)
+search_button = ttk.Button(maincontainer,text="Search", width=20, command=lambda:bffutils.search(maincontainer, "resultlistbox" ,search_entry.get(), pathlist) ).grid(row=1,column=3, pady=2, padx=2, sticky=tkinter.W + tkinter.E, columnspan=1)
 
 # path widgets
 pathes_label = ttk.Label(maincontainer,text="Paths",font=("Calibri", 12)).grid(row=2,column=0, pady=0, padx=2, sticky="w", columnspan=1)
@@ -38,8 +39,8 @@ deletepath_button = ttk.Button(maincontainer, text="Delete Path", width=20, styl
 
 # results
 result_label = ttk.Label(maincontainer,text="Results",font=("Calibri", 12)).grid(row=5,column=0, pady=0, padx=2, sticky="w", columnspan=1)
-result_list = tkinter.Listbox(maincontainer, name="resultlistbox" ,listvariable=tkinter.StringVar(value=pathlist), width=104, height=220).grid(row=6,column=0, pady=2, padx=2,sticky=tkinter.W + tkinter.E + tkinter.S + tkinter.N, columnspan=4)
-export_button = ttk.Button(maincontainer, text="Export Results", width=20, command= lambda:bffutils.export_results(maincontainer, "resultlistbox") ).grid(row=7,column=0, pady=2, padx=2, sticky=tkinter.W + tkinter.E + tkinter.S, columnspan=4)
+result_list = tkinter.Listbox(maincontainer, name="resultlistbox" ,listvariable=tkinter.StringVar([]), width=104, height=220).grid(row=6,column=0, pady=2, padx=2,sticky=tkinter.W + tkinter.E + tkinter.S + tkinter.N, columnspan=4)
+open_button = ttk.Button(maincontainer, text="Open", width=20, command= lambda:bffutils.open_selection(maincontainer, "resultlistbox") ).grid(row=7,column=0, pady=2, padx=2, sticky=tkinter.W + tkinter.E + tkinter.S, columnspan=4)
 
 maincontainer.pack() #needs to be packed after its content
 

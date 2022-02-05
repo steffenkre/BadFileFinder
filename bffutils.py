@@ -1,4 +1,4 @@
-import os
+import os, re
 from tkinter import filedialog
 
 def add_path(parentwidget, listname ,paths):
@@ -13,7 +13,7 @@ def load_paths():
     pathlist = []
     if os.path.isfile("paths.txt"):
         savefile = open("paths.txt", "r")
-        for path in savefile.readlines():
+        for path in savefile.read().splitlines():
             pathlist.append(path)
         savefile.close()
     else:
@@ -43,5 +43,21 @@ def delete_path(parentwidget, listname, paths):
 def export_results(parentwidget, listname):
     pass
 
-def search():
-    pass
+def search(parentwidget, listname, searchterm, paths):
+    if searchterm != "":
+        list = parentwidget.children[listname]
+        list.delete(0,'end')
+        for path in paths:
+            #check if path is valid
+            if os.path.isdir(path):
+                for p,d,f in os.walk(path):
+                    for i in f:
+                        match = re.match(searchterm.lower(), i.lower())
+                        if  match:
+                            print(p.replace("\\", "/")+"/"+i)
+                            list.insert(0, p.replace("\\", "/")+"/"+i)
+
+def open_selection(parentwidget, listname):
+    list = parentwidget.children[listname]
+    os.system(list.get(list.curselection()))
+
