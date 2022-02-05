@@ -4,13 +4,21 @@ from matplotlib.pyplot import fill
 from unicodedata import name
 from tkinter import ttk
 
+import time
+
 pathlist = bffutils.load_paths()
 root = tkinter.Tk()
 
-root.title("Bad File Finder 0.01a")
+root.title("Bad File Finder 0.01")
 root.minsize(340, 320)
 root.geometry("640x700")
+root.config(cursor="arrow")
 # window.iconbitmap("path/to/icon.ico") #window icon
+
+#dirty helper function
+def return_pressed(e):
+    bffutils.search(maincontainer, "resultlistbox" ,search_entry.get(), pathlist)
+
 
 # styles
 red_fg_style = ttk.Style()
@@ -27,8 +35,9 @@ maincontainer.columnconfigure(0, weight=1)
 # searchbar
 search_Label = ttk.Label(maincontainer,text="Search by Regular Expression",font=("Calibri", 12)).grid(row=0,column=0, pady=0, padx=2, sticky=tkinter.W, columnspan=1)
 search_entry = ttk.Entry(maincontainer)
+search_entry.bind("<Return>", return_pressed ) 
 search_entry.grid(row=1,column=0, pady=2, padx=2, sticky=tkinter.W + tkinter.E, columnspan=3)
-addpath_button = ttk.Button(maincontainer, text="Add Path", width=20, command= lambda:bffutils.add_path(maincontainer, "pathlistbox", pathlist) ).grid(row=4,column=2, pady=2, padx=2, sticky="e", columnspan=1)
+# addpath_button = ttk.Button(maincontainer, text="Add Path", width=20, command= lambda:bffutils.add_path(maincontainer, "pathlistbox", pathlist) ).grid(row=4,column=2, pady=2, padx=2, sticky="e", columnspan=1)
 search_button = ttk.Button(maincontainer,text="Search", width=20, command=lambda:bffutils.search(maincontainer, "resultlistbox" ,search_entry.get(), pathlist) ).grid(row=1,column=3, pady=2, padx=2, sticky=tkinter.W + tkinter.E, columnspan=1)
 
 # path widgets
@@ -46,3 +55,4 @@ maincontainer.pack() #needs to be packed after its content
 
 if __name__ == "__main__":
     root.mainloop()
+

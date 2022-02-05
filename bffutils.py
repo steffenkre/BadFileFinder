@@ -44,6 +44,7 @@ def export_results(parentwidget, listname):
     pass
 
 def search(parentwidget, listname, searchterm, paths):
+    parentwidget.config(cursor="wait")
     if searchterm != "":
         list = parentwidget.children[listname]
         list.delete(0,'end')
@@ -54,10 +55,11 @@ def search(parentwidget, listname, searchterm, paths):
                     for i in f:
                         match = re.match(searchterm.lower(), i.lower())
                         if  match:
-                            print(p.replace("\\", "/")+"/"+i)
                             list.insert(0, p.replace("\\", "/")+"/"+i)
+    parentwidget.config(cursor="")
+
 
 def open_selection(parentwidget, listname):
     list = parentwidget.children[listname]
-    os.system(list.get(list.curselection()))
+    os.system(list.get(list.curselection()) )
 
