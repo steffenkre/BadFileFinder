@@ -1,5 +1,6 @@
 import os, re
 from tkinter import filedialog
+import tkinter
 
 def add_path(parentwidget, listname ,paths):
     x = filedialog.askdirectory()
@@ -25,7 +26,10 @@ def save_paths(paths):
     print("saving: ", paths)
     savefile = open("paths.txt", "w")
     for i in paths:
-        savefile.write(i + "\n") 
+        savefile.writelines(i)
+        #add new line if not last line
+        if i != paths[-1]:
+            savefile.write("\n")
     savefile.close()
 
 def delete_path(parentwidget, listname, paths):
@@ -33,15 +37,29 @@ def delete_path(parentwidget, listname, paths):
     try:
         delete_index = list.curselection()[0]
         list.delete(delete_index)
-        paths.pop(-delete_index-1)
+        paths.pop(delete_index)
         save_paths(paths)
     except IndexError:
         print("no path selected")
 
+def mute_path(parentwidget, listname, paths):
+    list = parentwidget.children[listname]
+    try:
+        mute_index = list.curselection()[0]
+        print(mute_index)
+        mute_value = list.get(mute_index)
+        if "- (muted)" not in mute_value:
+            list.delete(mute_index) 
+            list.insert(mute_index, mute_value + " - (muted)")
+            paths[mute_index] = mute_value + " - (muted)"
+        else:
+            list.delete(mute_index) 
+            list.insert( mute_index, mute_value.replace(" - (muted)", "") )
+            paths[mute_index] = mute_value.replace(" - (muted)", "")
+        save_paths(paths)
+    except IndexError:
+        print("cant mute path")
 
-# todo
-def export_results(parentwidget, listname):
-    pass
 
 def search(parentwidget, listname, searchterm, paths):
     parentwidget.config(cursor="wait")

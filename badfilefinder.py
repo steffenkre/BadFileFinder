@@ -19,7 +19,6 @@ root.config(cursor="arrow")
 def return_pressed(e):
     bffutils.search(maincontainer, "resultlistbox" ,search_entry.get(), pathlist)
 
-
 # styles
 red_fg_style = ttk.Style()
 red_fg_style.configure('Delete.TButton', foreground='red')
@@ -43,6 +42,7 @@ search_button = ttk.Button(maincontainer,text="Search", width=20, command=lambda
 # path widgets
 pathes_label = ttk.Label(maincontainer,text="Paths",font=("Calibri", 12)).grid(row=2,column=0, pady=0, padx=2, sticky="w", columnspan=1)
 path_list = tkinter.Listbox(maincontainer, name="pathlistbox" ,listvariable=tkinter.StringVar(value=bffutils.load_paths()), height=5).grid(row=3,column=0, pady=2, padx=2, sticky=tkinter.W + tkinter.E, columnspan=4)
+mute_button = ttk.Button(maincontainer, text="Mute Paths", width=20, command= lambda:bffutils.mute_path(maincontainer, "pathlistbox", pathlist) ).grid(row=4,column=1, pady=2, padx=2, sticky="e", columnspan=1)
 addpath_button = ttk.Button(maincontainer, text="Add Path", width=20, command= lambda:bffutils.add_path(maincontainer, "pathlistbox", pathlist) ).grid(row=4,column=2, pady=2, padx=2, sticky="e", columnspan=1)
 deletepath_button = ttk.Button(maincontainer, text="Delete Path", width=20, style="Delete.TButton", command= lambda:bffutils.delete_path(maincontainer, "pathlistbox",pathlist)).grid(row=4,column=3, pady=2, padx=2, sticky="e", columnspan=1)
 
