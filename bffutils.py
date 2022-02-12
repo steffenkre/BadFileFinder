@@ -79,5 +79,9 @@ def search(parentwidget, listname, searchterm, paths):
 
 def open_selection(parentwidget, listname):
     list = parentwidget.children[listname]
-    os.system(list.get(list.curselection()) )
+    path = list.get(list.curselection())
+    #ecape spaces in path for os.system
+    path = path.replace(" ", "\\ ")
+    print (path)
+    os.system(path)
 
