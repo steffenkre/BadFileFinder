@@ -85,3 +85,31 @@ def open_selection(parentwidget, listname):
     print (path)
     os.system(path)
 
+def add_to_favorites(parentwidget, pathlistname, listname):
+    pathlist = parentwidget.children[pathlistname]
+    favlist = parentwidget.children[listname]
+    path = pathlist.get(pathlist.curselection())
+    favlist.insert(0, path)
+    pass
+
+def remove_from_favorites(parentwidget, listname):
+    favlist = parentwidget.children[listname]
+    try:
+        for i in favlist.curselection():
+            favlist.delete(i)
+    except IndexError:
+        print("no favorite selected")
+
+def clear_favorites(parentwidget, listname):
+    favlist = parentwidget.children[listname]
+    #remove all entries from list
+    favlist.delete(0, 'end')
+
+def export_to_bash(parentwidget, listname):
+    #create save file dialog
+    savefile = filedialog.asksaveasfile(mode='w', defaultextension=".sh")
+    if savefile != None:
+        list = parentwidget.children[listname]
+        for i in list.get(0, 'end'):
+            savefile.write( "cp '"+ i +"'\n")
+        savefile.close()
