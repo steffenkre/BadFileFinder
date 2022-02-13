@@ -18,6 +18,16 @@ def return_pressed(e):
 red_fg_style = ttk.Style()
 red_fg_style.configure('Delete.TButton', foreground='red')
 
+#file menu
+menubar = tkinter.Menu(root)
+filemenu = tkinter.Menu(root)
+filemenu.add_command(label="Export Copy-Bashfile", command=lambda:bffutils.export_to_bash(maincontainer, "favoriteslistbox") )
+filemenu.add_command(label="Exit", command=root.quit)
+
+menubar.add_cascade(label="File", menu=filemenu)
+root.config(menu=menubar)
+
+
 # maincontainers
 maincontainer= tkinter.Frame(root, padx=2, pady=2)
 maincontainer.pack(fill=tkinter.BOTH, expand=True)    
@@ -49,7 +59,7 @@ open_button = ttk.Button(result_container, text="Open 📁",width=20 , command= 
 
 #favorite widgets
 favorite_list = tkinter.Listbox(maincontainer, name="favoriteslistbox", selectmode='multiple',listvariable=tkinter.StringVar([]), height=2)
-export_favorites_to_sh = ttk.Button(favorites_container, text="Export Bashscript ✔",width=20, command=lambda:bffutils.export_to_bash(maincontainer, "favoriteslistbox") )
+# export_favorites_to_sh = ttk.Button(favorites_container, text="Export Bashscript ✔",width=20, command=lambda:bffutils.export_to_bash(maincontainer, "favoriteslistbox") )
 remove_favorite = ttk.Button(favorites_container, text="Remove Favorite ❌",width=20, command=lambda:bffutils.remove_from_favorites(maincontainer, "favoriteslistbox") )
 clear_favorites = ttk.Button(favorites_container, text="Clear Favorites ☠",width=20, style="Delete.TButton", command=lambda:bffutils.clear_favorites(maincontainer, "favoriteslistbox") )
 
@@ -61,7 +71,7 @@ mute_button.pack(side="right")
 deletepath_button.pack(side="right")
 open_button.pack(side="right")
 add_to_favorites_button.pack(side="right", fill="x", expand=True)
-export_favorites_to_sh.pack(side="left", fill="x", expand=True)
+# export_favorites_to_sh.pack(side="left", fill="x", expand=True)
 clear_favorites.pack(side="right")
 remove_favorite.pack(side="right")
 
