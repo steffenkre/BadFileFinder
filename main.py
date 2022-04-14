@@ -4,7 +4,7 @@ from tkinter import ttk
 pathlist = bffutils.load_paths()
 root = tkinter.Tk()
 
-root.title("Bad File Finder 0.02 Alpha")
+root.title("Bad File Finder 0.2.5 Alpha")
 root.minsize(395, 400)
 root.geometry("640x700")
 root.config(cursor="arrow")
@@ -46,7 +46,7 @@ search_button = ttk.Button(search_container,text="Search 🔍", width=20 ,comman
 
 # path widgets
 paths_label = ttk.Label(maincontainer,text="Paths",font=("Calibri", 12))
-path_list = tkinter.Listbox(maincontainer, name="pathlistbox" ,listvariable=tkinter.StringVar(value=bffutils.load_paths()), height=5)
+path_list = tkinter.Listbox(maincontainer, name="pathlistbox" , listvariable=tkinter.StringVar(value=bffutils.load_paths()), height=5)
 mute_button = ttk.Button(path_container, text="Mute Paths", width=20 ,command= lambda:bffutils.mute_path(maincontainer, "pathlistbox", pathlist) )
 addpath_button = ttk.Button(path_container, text="Add Path 📌", width=20 ,command= lambda:bffutils.add_path(maincontainer, "pathlistbox", pathlist) )
 deletepath_button = ttk.Button(path_container, text="Delete Path ❌", width=20 ,style="Delete.TButton", command= lambda:bffutils.delete_path(maincontainer, "pathlistbox",pathlist))
@@ -55,7 +55,7 @@ deletepath_button = ttk.Button(path_container, text="Delete Path ❌", width=20 
 result_label = ttk.Label(maincontainer,text="Results",font=("Calibri", 12))
 result_list = tkinter.Listbox(maincontainer, name="resultlistbox" , listvariable=[], height=2)
 add_to_favorites_button = ttk.Button(result_container, text="↓ Add to Favorites ↓",width=20, command= lambda:bffutils.add_to_favorites(maincontainer, "resultlistbox","favoriteslistbox") )
-open_button = ttk.Button(result_container, text="Open 📁",width=20 , command= lambda:bffutils.open_selection(maincontainer, "resultlistbox") )
+open_button = ttk.Button(result_container, text="Open 📁",width=20 , command=lambda:bffutils.open_selection(maincontainer, "resultlistbox") )
 
 #favorite widgets
 favorite_list = tkinter.Listbox(maincontainer, name="favoriteslistbox", selectmode='multiple',listvariable=[], height=2)
