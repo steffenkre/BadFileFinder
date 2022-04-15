@@ -1,3 +1,4 @@
+from fileinput import filename
 import os, re
 from tkinter import filedialog, messagebox
 import tkinter
@@ -113,5 +114,6 @@ def export_to_bash(parentwidget, listname):
     if savefile != None:
         list = parentwidget.children[listname]
         for i in list.get(0, 'end'):
-            savefile.write( "cp '"+ i +"'\n")
+            filename = i.split("/")[-1]
+            savefile.write( "cp '"+ i +"' " + filename + "\n")
         savefile.close()

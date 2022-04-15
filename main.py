@@ -4,7 +4,7 @@ from tkinter import ttk
 pathlist = bffutils.load_paths()
 root = tkinter.Tk()
 
-root.title("Bad File Finder 0.2.5 Alpha")
+root.title("Bad File Finder 0.2.6")
 root.minsize(395, 400)
 root.geometry("640x700")
 root.config(cursor="arrow")
@@ -55,10 +55,11 @@ deletepath_button = ttk.Button(path_container, text="Delete Path ❌", width=20 
 result_label = ttk.Label(maincontainer,text="Results",font=("Calibri", 12))
 result_list = tkinter.Listbox(maincontainer, name="resultlistbox" , listvariable=[], height=2)
 add_to_favorites_button = ttk.Button(result_container, text="↓ Add to Favorites ↓",width=20, command= lambda:bffutils.add_to_favorites(maincontainer, "resultlistbox","favoriteslistbox") )
-open_button = ttk.Button(result_container, text="Open 📁",width=20 , command=lambda:bffutils.open_selection(maincontainer, "resultlistbox") )
+open_button = ttk.Button(result_container, text="Open selected Favorite",width=20 , command=lambda:bffutils.open_selection(maincontainer, "resultlistbox") )
 
 #favorite widgets
 favorite_list = tkinter.Listbox(maincontainer, name="favoriteslistbox", selectmode='multiple',listvariable=[], height=2)
+
 # export_favorites_to_sh = ttk.Button(favorites_container, text="Export Bashscript ✔",width=20, command=lambda:bffutils.export_to_bash(maincontainer, "favoriteslistbox") )
 remove_favorite = ttk.Button(favorites_container, text="Remove Favorite",width=20, command=lambda:bffutils.remove_from_favorites(maincontainer, "favoriteslistbox") )
 clear_favorites = ttk.Button(favorites_container, text="Clear Favorites ❌",width=20, style="Delete.TButton", command=lambda:bffutils.clear_favorites(maincontainer, "favoriteslistbox") )
